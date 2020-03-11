@@ -1,12 +1,8 @@
 import cv2
 import os
 from PIL import Image
-import matplotlib.image as mpimg
-import matplotlib.pyplot as plt
 import pandas as pd
 import pickle
-
-directory1 = '../dataset/videos/videos_red'
 
 def getFrames(directory):
     '''Divide videos in frames and save them in specified directory by object'''
@@ -19,8 +15,9 @@ def getFrames(directory):
         cam = cv2.VideoCapture(path)
         try:
             # Creating a folder named as object name
-            if not os.path.exists(f'../dataset/images/{object_name}'):
-                os.makedirs(f'../dataset/images/{object_name}')
+            if not os.path.exists(f'../../INPUT/images/{object_name}'):
+                os.makedirs(f'../../INPUT/images/{object_name}')
+                print(f'{object_name} folder created')
             # If not created then raise error
         except OSError:
             print (f'Error while creating directory {object_name}')
@@ -31,7 +28,7 @@ def getFrames(directory):
             ret,frame = cam.read()
             if ret:
                 # if video is still left continue creating images
-                name = f'../dataset/images/{object_name}/{object_name}' + str(currentframe) + '.jpg'
+                name = f'../../INPUT/images/{object_name}/{object_name}' + str(currentframe) + '.jpg'
                 # writing the extracted images
                 cv2.imwrite(name, frame)
                 # increasing counter
@@ -42,17 +39,12 @@ def getFrames(directory):
         cam.release()
         cv2.destroyAllWindows()
 
-getFrames(directory1)
 
-directory2 = '../dataset/images'
-
-def createDataset(directory):
+def getDataset(directory):
     '''Create a dataset where store every image as array, it's label and path, in pickle format'''
     dataset = pd.DataFrame(columns=['label','image','path'])
     for obj in os.listdir(directory):
-        for im in os.listdir(f'{directory}/{obj}/images_red'):
-            print(im)
-            dataset = dataset.append({'label':obj,'image':cv2.imread(f'{directory}/{obj}/images_red/{im}'),'path':f'{directory}/{obj}/images_red/{im}'},ignore_index=True)
-    dataset.to_pickle('../dataset/dataset.pkl')
-        
-createDataset(directory2)
+        for im in os.listdir(f'{directory}/{obj}'):
+            dataset = dataset.append({'label':obj,'image':cv2.imread(f'{directory}/{obj}/{im}'),'path':f'{directory}/{obj}/{im}'},ignore_index=True)
+        print(f'{obj} dataset created')
+    dataset.to_pickle('../../INPUT/training_dataset.pkl')

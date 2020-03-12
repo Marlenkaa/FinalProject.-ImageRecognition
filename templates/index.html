@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+ 
+<head>
+    <title>Kitcheware Detector</title>
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+ 
+<body>
+    
+    <div class="container">
+        
+        <div class="jumbotron">
+            <h1>Kitcheware Detector</h1>
+            <img src="kitchenware.png" alt="Utensilios de cocina" class="kitchen">
+            <p class="lead"></p>
+            
+        </div>
+ 
+        <div class="row marketing">
+            <div class="col-lg-6">
+                <h4>Kitchenware Detector fue creado con el propósito de ayudar a personas invidentes</h4>
+                <p>El objetivo principal de esta aplicación es detectar objetos de cocina mediante</br />
+                   la cámara de tu móvil e indicar por mensaje de voz el objeto que enfocado,</br />
+                   facilitando así a las personas con problemas de visión poder localizar objetos.
+                </p>
+                <p>Se trata de una aplicación en desarrollo, por tanto, todavía no cumple con su objetivo</br />
+                   propuesto. De momento, se puede probar la versión demo en esta web, donde cargando tu foto</br />
+                   puedes comprobar si el objeto fotografiado es correctamente predicho mediante mensaje de voz.<br />
+                </p>
+
+                <h5>INSERTE UNA IMAGEN</h5>
+                    <form action="/upload" method="POST" enctype="multipart/form-data">
+                        <input type="file" name="file" id="file" class="inputfile"/>
+                        <label for="file">Cargar Imagen</label>
+                        <input type="submit" name="submit" id="submit" class="inputfile"/>
+                        <label for="submit">Predecir objeto</label>
+                    </form>
+            </div>
+
+        </div>
+        
+        <footer class="footer">
+            <p>&copy; Marlena Anna Polak | 2020</p>
+        </footer>
+ 
+    </div>
+</body>
+ 
+</html>

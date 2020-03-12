@@ -7,7 +7,10 @@ from werkzeug.utils import secure_filename
 from flask import Flask, render_template,request, jsonify
 
 # instancia del objeto Flask
-app = Flask(__name__)
+app = Flask(__name__, static_folder='./templates/')
+
+# instancia del objeto Flask
+app.config['images_uploaded'] = './templates/images_uploaded'
 
 @app.route("/")
 def uploadFile():
@@ -21,10 +24,10 @@ def uploader():
   f = request.files["file"]
   filename = secure_filename(f.filename)
   # Guardamos el archivo en el directorio "Archivos PDF"
-  f.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+  f.save(os.path.join(app.config['images_uploaded'], filename))
   # Retornamos una respuesta satisfactoria con la predicción
-  pred = objectDetection(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+  pred = objectDetection(os.path.join(app.config['images_uploaded'], filename))
   return render_template('image_prediction.html', pred=pred)
   
 if __name__ == "__main__":
-    app.run()
+    app.run('0.0.0.0',5000,debug=True)

@@ -12,7 +12,7 @@ def objectDetection(image_path):
 
     # load model 
     
-    model = load_model('./models/seventh_model_better.h5')
+    model = load_model('scr/models/seventh_model_better.h5')
 
     # image preprocessing 
 
@@ -29,8 +29,7 @@ def objectDetection(image_path):
     predictions = {}
     for obj in class_names:
         predictions[obj] = pred[class_names.index(obj)]
-    print(f'{max(predictions.items(), key=operator.itemgetter(1))[0]}: {max(predictions.items(), key=operator.itemgetter(1))[1]}')
-    plt.imshow(image);
+    return f'{max(predictions.items(), key=operator.itemgetter(1))[0]}'
   
   
   

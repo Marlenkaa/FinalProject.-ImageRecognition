@@ -131,3 +131,5 @@ dmypy.json
 INPUT/images
 INPUT/videos
 __pycache__
+templates/images_uploaded
+
